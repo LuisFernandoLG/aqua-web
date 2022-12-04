@@ -71,6 +71,12 @@ export const InformationCard = ({ drivers, driver, selectDriver }) => {
               <Badge bg="secondary">{driver.longitude}</Badge>
           </h6>
         </ListGroup.Item>
+        <ListGroup.Item className="d-flex gap-2">
+          Cantidad de agua:
+          <h6>
+            <Badge bg="primary">{driver?.esp32?.litros}L</Badge>
+          </h6>
+        </ListGroup.Item>
 
 
       </ListGroup>

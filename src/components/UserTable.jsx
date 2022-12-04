@@ -1,12 +1,20 @@
-import { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Table from 'react-bootstrap/Table';
-import { convertTimeStamp } from '../helpers/convertTimeStamp';
 import { useAquacabo } from '../hooks/useAquacabo';
 
 function UserTable() {
-
+  
   const { clients } = useAquacabo()
+  const {resetPassword} = useAquacabo()
+
+  const handleResetPassword = (email) => {
+    resetPassword({email}).then(()=>{
+      alert('Correo enviado a ' + email + ' con instrucciones para restablecer la contraseña')
+    }).catch((err)=>{
+      console.log({err})
+      alert('Error al enviar el correo')
+    })
+  }
 
  
   console.log({clients})
@@ -20,6 +28,7 @@ function UserTable() {
           <th>Correo</th>
           <th>Teléfono</th>
           <th>Puesto</th>
+          <th>Contraseña</th>
          
         </tr>
       </thead>
@@ -32,6 +41,9 @@ function UserTable() {
             <td>{driver.email}</td>
             <td>{driver.phone}</td>
             <td>Cliente</td>
+            <td>  
+              <Button variant="warning" onClick={()=>handleResetPassword(driver.email)}>Reestablecer contraseña</Button>
+            </td>
             
 
           </tr>

@@ -21,6 +21,8 @@ export const MapCard = ({ isLoaded, trucks, driver }) => {
 
   if (!isLoaded) return <h1>Cargando</h1>;
 
+  console.log({trucks})
+  console.log({driver})
   
 
   return (
@@ -36,7 +38,7 @@ export const MapCard = ({ isLoaded, trucks, driver }) => {
         {trucks.map((item) => {
           return (
             <Marker
-              key={item.id}
+              key={item.driverId}
               position={{ lat: item.latitude, lng: item.longitude }}
               icon={driver?.id === item.driverId ? iconImg : iconBaw}
 

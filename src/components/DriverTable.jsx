@@ -9,6 +9,18 @@ function DriverTable() {
   const { drivers, trucks } = useAquacabo();
   const [users, setUsers] = useState([]);
 
+  const {resetPassword} = useAquacabo()
+
+  const handleResetPassword = (email) => {
+    resetPassword({email}).then(()=>{
+      alert('Correo enviado a ' + email + ' con instrucciones para restablecer la contraseña')
+    }).catch((err)=>{
+      console.log({err})
+      alert('Error al enviar el correo')
+    })
+  }
+
+
   useEffect(() => {
     const users = drivers.map((driver) => {
       const truck = trucks.find((truck) => truck.driverId === driver.id);
@@ -30,6 +42,7 @@ function DriverTable() {
           <th>Puesto</th>
           <th>Última conexión</th>
           <th>Última ubicación</th>
+          <th>Contraseña</th>
         </tr>
       </thead>
       <tbody>
@@ -44,7 +57,12 @@ function DriverTable() {
             <td>
               long:{driver.longitude} lat:{driver.latitude}
             </td>
-           
+              
+            <td>
+              <Button variant="warning" onClick={()=>handleResetPassword(driver.email)}>Reestablecer contraseña</Button>
+            </td>
+              
+          
           </tr>
         ))}
       </tbody>

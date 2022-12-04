@@ -1,5 +1,5 @@
 export const firebaseErrors = {
-  "no-driver" : "No eres un conductor",
+  "no-driver" : "No eres un administrador",
   "no-users" : "No hay usuarios",
   "auth/wrong-password":
     "Correo o contraseña incorrecta",

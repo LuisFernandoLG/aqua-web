@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail, signInWithEmailAndPassword } from "firebase/auth";
 import { get, onValue, ref } from "firebase/database";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -78,7 +78,7 @@ export const useAquacabo = () => {
               console.log({ snapshot:snapshot.val() });
               if (snapshot.exists()) {
                 const authUser = snapshot.val();
-                if(authUser.type === "DRIVER"){
+                if(authUser.type === "ADMIN"){
                 resolve(authUser);
                 }else{
                   reject("no-driver");
@@ -100,7 +100,18 @@ export const useAquacabo = () => {
         });
     });
 
+    const resetPassword = ({ email }) =>
+    new Promise((resolve, reject) => {
+      sendPasswordResetEmail(auth, email)
+        .then(() => {
+          resolve(true);
+        })
+        .catch((error) => {
+          reject(error.code);
+        });
+    });
 
 
-  return { trucks, drivers, clients, login };  
+
+  return { trucks, drivers, clients, login, resetPassword };  
 }

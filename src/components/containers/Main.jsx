@@ -11,11 +11,14 @@ import { Container } from "react-bootstrap";
 
 const initialDriver = {
   id: 0,
-  email: "example@gmail.com",
-  name: "nombre",
-  phone: "624123457",
-  type: "Conductor",
+  email: "",
+  name: "",
+  phone: "",
+  type: "",
   lastStatus: 1669653101,
+  esp32:{
+    litros:0
+  }
 };
 
 export const Main = () => {
@@ -31,6 +34,8 @@ export const Main = () => {
     const truckLocation = trucks.find((truck) => truck.driverId === data.id);
     setDriver({ ...data, ...truckLocation });
   };
+
+  console.log({driver})
 
   return (
     <Container >
